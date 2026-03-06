@@ -14,7 +14,7 @@ OpenWindow::OpenWindow(int w, int  h, const std::string& t) : width(w), height(h
     }
     glfwMakeContextCurrent(window);
 
-    glewInit();
+    glfwInit();
 }
 
 OpenWindow::~OpenWindow() {
