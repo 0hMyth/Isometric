@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.1)
+cmake_minimum_required(VERSION 3.16)
 project(Isometric VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -40,7 +40,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL)
 
 # ============================================================
 # GLFW  (window + context creation)
-# Tries system install first, then falls back to vendor/
+# Tries system install, then vendor/, then downloads via FetchContent
 # ============================================================
 find_package(glfw3 3.3 QUIET)
 
@@ -55,10 +55,19 @@ elseif(EXISTS ${CMAKE_SOURCE_DIR}/vendor/glfw/CMakeLists.txt)
     add_subdirectory(vendor/glfw)
     target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 else()
-    message(FATAL_ERROR
-        "GLFW not found. Either:\n"
-        "  - Install via package manager (brew install glfw / vcpkg install glfw3)\n"
-        "  - Or clone it into vendor/glfw/")
+    message(STATUS "GLFW not found locally — fetching via FetchContent")
+    include(FetchContent)
+    set(GLFW_BUILD_DOCS     OFF CACHE BOOL "" FORCE)
+    set(GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
+    set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    FetchContent_Declare(
+        glfw
+        GIT_REPOSITORY https://github.com/glfw/glfw.git
+        GIT_TAG        3.4
+        GIT_SHALLOW    TRUE
+    )
+    FetchContent_MakeAvailable(glfw)
+    target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 endif()
 
 # ============================================================
@@ -80,7 +89,7 @@ endif()
 
 # ============================================================
 # GLM  (math library — header only)
-# Tries system install first, then falls back to vendor/
+# Tries system install, then vendor/, then downloads via FetchContent
 # ============================================================
 find_package(glm QUIET)
 
@@ -95,10 +104,16 @@ elseif(EXISTS ${CMAKE_SOURCE_DIR}/vendor/glm/glm/glm.hpp)
     message(STATUS "Using vendored GLM (header-only)")
     target_include_directories(${PROJECT_NAME} PRIVATE vendor/glm)
 else()
-    message(FATAL_ERROR
-        "GLM not found. Either:\n"
-        "  - Install via package manager (brew install glm / vcpkg install glm)\n"
-        "  - Or clone it into vendor/glm/")
+    message(STATUS "GLM not found locally — fetching via FetchContent")
+    include(FetchContent)
+    FetchContent_Declare(
+        glm
+        GIT_REPOSITORY https://github.com/g-truc/glm.git
+        GIT_TAG        1.0.1
+        GIT_SHALLOW    TRUE
+    )
+    FetchContent_MakeAvailable(glm)
+    target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
 endif()
 
 # ============================================================
