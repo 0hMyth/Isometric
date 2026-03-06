@@ -1,4 +1,4 @@
-#include "include/window.h"
+#include "../include/window.h"
 #include <iostream>
 
 OpenWindow::OpenWindow(int w, int  h, const std::string& t) : width(w), height(h), title(t) {
