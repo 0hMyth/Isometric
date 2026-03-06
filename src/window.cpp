@@ -14,7 +14,11 @@ OpenWindow::OpenWindow(int w, int  h, const std::string& t) : width(w), height(h
     }
     glfwMakeContextCurrent(window);
 
-    glfwInit();
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        glfwDestroyWindow(window);
+        glfwTerminate();
+        exit(-1);
+    }
 }
 
 OpenWindow::~OpenWindow() {
