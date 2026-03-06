@@ -1,0 +1,97 @@
+# ============================================================
+# Build output
+# ============================================================
+build/
+out/
+cmake-build-*/
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# ============================================================
+# CMake generated files
+# ============================================================
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# ============================================================
+# Object / compiled files
+# ============================================================
+*.o
+*.obj
+*.pch
+*.pdb
+*.ilk
+*.exp
+
+# ============================================================
+# macOS
+# ============================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+*.xcodeproj/
+*.xcworkspace/
+
+# ============================================================
+# Windows
+# ============================================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Visual Studio / MSVC
+.vs/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.user
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# ============================================================
+# IDEs
+# ============================================================
+
+# VSCode
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# CLion / JetBrains
+.idea/
+*.iml
+
+# Xcode
+xcuserdata/
+
+# ============================================================
+# Logs & misc
+# ============================================================
+*.log
+*.tmp
+*.swp
+*.swo
+*~
