@@ -26,7 +26,8 @@ if(EXISTS ${CMAKE_SOURCE_DIR}/main.cpp)
     list(APPEND SOURCES ${CMAKE_SOURCE_DIR}/main.cpp)
 endif()
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES}
+        include/window.h)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}/src
